@@ -1,0 +1,51 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/",
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_CXX_FLAGS_DEBUG": "-Wall -Wextra -Wpedantic -g"
+      }
+    },
+    {
+      "name": "linux",
+      "inherits": "base",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-linux"
+      }
+    },
+    {
+      "name": "windows",
+      "inherits": "base",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+          "VCPKG_TARGET_TRIPLET": "x64-mingw-dynamic"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux",
+      "configurePreset": "linux"
+    },
+    {
+      "name": "windows",
+      "configurePreset": "windows"
+    }
+  ]
+}

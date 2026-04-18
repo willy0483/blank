@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 23)
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
-    src/Texture/texture.cpp
+    src/Game/game.cpp
     src/stb_image.cpp
 )
 
